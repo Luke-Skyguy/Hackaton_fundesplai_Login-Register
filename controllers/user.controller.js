@@ -1,6 +1,6 @@
 import express from 'express';
 import { sequelize } from "../loadSequelize.js";
-import { Usuario, Objeto } from '../models/models.js';
+import {Usuario} from '../models/models.js';
 import jwt from 'jsonwebtoken';
 import authConfig from '../middlewares/authConfig.js';
 const { secretKey, expiredAfter } = authConfig;
