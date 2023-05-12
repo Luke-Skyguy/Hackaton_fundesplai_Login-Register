@@ -1,7 +1,6 @@
 import express from 'express';
 import { sequelize } from "../loadSequelize.js";
 import { Usuario, Objeto } from '../models/models.js';
-import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import authConfig from '../middlewares/authConfig.js';
 const { secretKey, expiredAfter } = authConfig;
@@ -21,7 +20,7 @@ controller.post('/login', async (req, res) => {
     Usuario.findOne({ where: { email } })
         .then((usuari) => {
 
-            if (usuari && bcrypt.compareSync(password, usuari.password)) {
+            if (usuari && usuari.password) {
                 return usuari;
             } else {
                 throw "email/password invalids";
@@ -52,7 +51,6 @@ controller.post('/register', (req, res, next) => {
             if (err) {
                 return res.status(500).json(err)
             };
-            const hash = bcrypt.hashSync(req.body.password, 10);
             req.body.password = hash;
 
             Usuario.create(req.body)
