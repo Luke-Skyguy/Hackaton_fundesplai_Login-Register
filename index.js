@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import controller from "./controllers/user.controller";
+import controller from "./controllers/user.controller.js";
 
 const app = express();
 
